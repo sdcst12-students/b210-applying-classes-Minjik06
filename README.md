@@ -10,7 +10,7 @@ Today, we will be trying to extend how we think about classes and objects to bui
 * blackjack (the hilarious casino card game)
 
 ** Important!
-The main block of your program can only consist of the code that instantiates your object.  All of your program must be contained within the class template.
+The main block of your program can only consist of the code that instantiates your object. m All of your program ust be contained within the class template.
 
 Assessment:
 You will be graded on the following criteria:

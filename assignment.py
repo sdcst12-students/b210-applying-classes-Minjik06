@@ -6,6 +6,9 @@ class game:
   tie=0
   gameN=0
 
+  winblack=0
+  lossblack=0
+  tiebalck=0
 
   def gameSauto(self, numberOfGame):
     rockps=["rock","paper","scissors"]
@@ -48,7 +51,6 @@ class game:
     print(f"win : {self.win} loss : {self.loss} tie : {self.tie}, # of Game : {self.gameN}")    
     #return self.win, self.loss, self.tie, self.gameN
 
-
   def resetS(self):
     k=str(input("Do you want to reset the game? (yes or no): "))
     if k=="yes":
@@ -62,6 +64,7 @@ class game:
       if l=="yes":
         b=int(input("How many times do you want to play the game?: "))
         c=str(input("Do you want to play game with auto? yes or no: "))
+        print()
         if c=="yes":
           self.gameSauto(b)
         elif c=="no":
@@ -73,6 +76,7 @@ class game:
       if a=="yes":
         b=int(input("How many times do you want to play the game?: "))
         c=str(input("Do you want to play game with auto? yes or no: "))
+        print()
         if c=="yes":
           self.gameSauto(b)
         elif c=="no":
@@ -80,28 +84,56 @@ class game:
       else:
         exit()
       
-
   def finish(self):
     print()
     print(f"win:{self.win}\nloss:{self.loss}\ntie:{self.tie}\n#ofGame:{self.gameN}")
     print()
     self.resetS()
 
+
+  def blackj(self):
+    card=["A",2,3,4,5,6,7,8,9,10,10,10]
+    str(input("Enter 'pick' to chose the card"))
+    for i in range(2):
+      card1=random.choice(card)
+      card2=random.choice(card)
+      cardO2=random.choice(card)
+      cardO2=random.choice(card)
+    
+    print(f"your cards: {card1},{card2}")
+    print()
+    
+    a=str(input("Do you want to pick card? yes or no"))
+
+    cardt=card1+card2
+    while a=="yes":
+      card3=random.choice(card)
+      cardt+=card3
+
+
+
+
+
+
+
   def __init__(self):
-    pass
+    k=int(input("Game Options\n1.rock paper scissors\n2.blackjack"))
+    if k==1:
+      print("ROCK PAPER SCISSORS")
+      b=int(input("How many times do you want to play the game?: "))
+      a=str(input("Do you want to start the game with auto? yes or no: "))
+      print()
+      if a=="yes":
+        self.gameSauto(b)
+      else:
+        self.gameNauto(b)
+    else:
+      self.blackj()
 
 
 # This is the only command allowed that is not in the class template. All code must be done there.
 g = game()
-g.gameSauto(15)
 
-"""g.gameN1("rock")
-g.gameN1("Scissors")
-g.gameN1("Scissors")
-g.resetS()
-g.gameN1("rock")
-g.gameN1("Scissors")
-g.gameN1("Scissors")
-g.gameN1("Scissors")"""
+
 
 

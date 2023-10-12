@@ -14,6 +14,12 @@ class game:
       self.gameN1(p)
     self.finish()
 
+  def gameNauto(self, nOg):
+    for i in range(nOg):
+      a=str(input("rock or paper or scissors? : "))
+      self.gameN1(a)
+    self.finish()
+
   def gameN1(self,rps):
     self.gameN+=1
     rps1=[1,2,3]
@@ -39,23 +45,47 @@ class game:
         self.loss+=1
       else:
         self.win+=1
-    print(self.win, self.loss, self.tie, self.gameN)    
+    print(f"win : {self.win} loss : {self.loss} tie : {self.tie}, # of Game : {self.gameN}")    
     #return self.win, self.loss, self.tie, self.gameN
 
 
   def resetS(self):
-    print(f"You played {self.gameN} games")
-    k=str(input("Are you sure resetting the game? (yes or no)"))
+    k=str(input("Do you want to reset the game? (yes or no): "))
     if k=="yes":
       self.win=0
       self.loss=0
       self.tie=0
       self.gameN=0
-    print("game reseted")
+      print("game reseted")
+      print()
+      l=str(input("Playing game again? yes or no: "))
+      if l=="yes":
+        b=int(input("How many times do you want to play the game?: "))
+        c=str(input("Do you want to play game with auto? yes or no: "))
+        if c=="yes":
+          self.gameSauto(b)
+        elif c=="no":
+          self.gameNauto(b)
+      else:
+        exit()
+    else:
+      a=str(input("continue game yes or no: "))
+      if a=="yes":
+        b=int(input("How many times do you want to play the game?: "))
+        c=str(input("Do you want to play game with auto? yes or no: "))
+        if c=="yes":
+          self.gameSauto(b)
+        elif c=="no":
+          self.gameNauto(b)
+      else:
+        exit()
+      
 
   def finish(self):
-    print(f"win:{self.win}\n loss:{self.loss}\n tie:{self.tie}\n #ofGame:{self.gameN}")
-    
+    print()
+    print(f"win:{self.win}\nloss:{self.loss}\ntie:{self.tie}\n#ofGame:{self.gameN}")
+    print()
+    self.resetS()
 
   def __init__(self):
     pass
@@ -63,7 +93,7 @@ class game:
 
 # This is the only command allowed that is not in the class template. All code must be done there.
 g = game()
-g.gameSauto(10)
+g.gameSauto(15)
 
 """g.gameN1("rock")
 g.gameN1("Scissors")

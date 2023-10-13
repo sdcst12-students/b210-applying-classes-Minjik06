@@ -90,25 +90,100 @@ class game:
     print()
     self.resetS()
 
+  def blackjA(self):
+    card=[1,2,3,4,5,6,7,8,9,10,10,10,11]
+    a=random.choice(card)
+    b=random.choice(card)
+    total=a+b
+    cardk=[]
+    cardk.append(a)
+    cardk.append(b)
+
+
+    if 18<total<22:
+      return total
+    else:
+      while 18>total:
+        p=random.choice(card)
+        cardk.append(p)
+        total=total+p
+        if total==21:
+          return 21
+    
+    if total > 26:
+      if total.contains(11):
+        total=total+10
+        return total
+      else:
+        return total
+
+
+
+    
 
   def blackj(self):
-    card=["A",2,3,4,5,6,7,8,9,10,10,10]
+    card=["A",2,3,4,5,6,7,8,9,"J","Q","K"]
     str(input("Enter 'pick' to chose the card"))
+    
     for i in range(2):
       card1=random.choice(card)
       card2=random.choice(card)
-      cardO2=random.choice(card)
+      cardO1=random.choice(card)
       cardO2=random.choice(card)
     
     print(f"your cards: {card1},{card2}")
+  
+    cardp=[]
+    cardp.append(card1)
+    cardp.append(card2)
+
     print()
     
-    a=str(input("Do you want to pick card? yes or no"))
+    a=str(input("Do you want to pick more card? yes or no"))
 
-    cardt=card1+card2
     while a=="yes":
       card3=random.choice(card)
-      cardt+=card3
+      cardp.append(card3)
+      a=str(input("Do you want to pick more card? yes or no"))
+
+    total=0
+
+    for i in cardp:
+      if cardp[i]=="A":
+        k=int("A= 1? or 11? :" )
+        total+=k
+      elif cardp[i]=="J" or cardp[i]=="Q" or cardp[i]=="K":
+        total+=10
+      else:
+        total+=cardp[i]
+
+    if abs(21-self.blackjA()) < abs(21-total):
+      print("You loss")
+    else:
+      print("You win")
+
+
+
+
+
+
+    """cardOp=[]
+    cardOp.append(cardO1)
+    cardOp.append(cardO2)
+    cardOt=0
+    numberOfA=0
+
+    
+        
+    while True:
+      for i in cardOp:
+        if cardOp[i]!="A" or cardOp[i]!="J" or cardOp[i]!="Q" or cardOp[i]!="K":
+          cardOt+=cardOp[i]
+        if cardOp[i]=="A":"""
+      
+      
+
+    
 
 
 

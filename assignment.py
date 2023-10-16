@@ -1,5 +1,6 @@
 #! python3
 import random
+import math
 class game:
   win=0
   loss=0
@@ -60,7 +61,7 @@ class game:
       self.gameN=0
       print("game reseted")
       print()
-      l=str(input("Playing game again? yes or no: "))
+      l=str(input("Playing game again? yes or no or change: "))
       if l=="yes":
         b=int(input("How many times do you want to play the game?: "))
         c=str(input("Do you want to play game with auto? yes or no: "))
@@ -69,10 +70,12 @@ class game:
           self.gameSauto(b)
         elif c=="no":
           self.gameNauto(b)
+      elif l=="change":
+        self.blackj()
       else:
         exit()
     else:
-      a=str(input("continue game yes or no: "))
+      a=str(input("continue game yes or no or change: "))
       if a=="yes":
         b=int(input("How many times do you want to play the game?: "))
         c=str(input("Do you want to play game with auto? yes or no: "))
@@ -81,6 +84,9 @@ class game:
           self.gameSauto(b)
         elif c=="no":
           self.gameNauto(b)
+
+      elif a=="change":
+        self.blackj()
       else:
         exit()
       
@@ -89,6 +95,11 @@ class game:
     print(f"win:{self.win}\nloss:{self.loss}\ntie:{self.tie}\n#ofGame:{self.gameN}")
     print()
     self.resetS()
+
+  def pickC(self):
+    card=[1,2,3,4,5,6,7,8,9,10,10,10,11]
+    a=random.choice(card)
+    return a
 
   def blackjA(self):
     card=[1,2,3,4,5,6,7,8,9,10,10,10,11]
@@ -99,37 +110,45 @@ class game:
     cardk.append(a)
     cardk.append(b)
 
-
-    if 18<total<22:
+    if 18<total<25:  #19 20 21 22 23 24
       return total
-    else:
-      while 18>total:
-        p=random.choice(card)
-        cardk.append(p)
-        total=total+p
-        if total==21:
-          return 21
-    
-    if total > 26:
-      if total.contains(11):
-        total=total+10
-        return total
+    else:  # 18 17 16....
+      if total<19:
+        while 19>total:
+          o=self.pickC()
+          cardk.append(o)
+          total=total+o
+          if total==21:
+            return 21
+          elif 21<total<25:
+            return total
+          elif total>24:
+            if cardk.contains(11):
+              total=total-10
+              c=self.pickC()
+              cardk.append(c)
+            else:
+              return total
       else:
+        while total>24:
+          if cardk.contains(11):
+              total=total-10
+              c=self.pickC()
+              cardk.append(c)
+          else:
+            return total
         return total
 
 
 
     
-
   def blackj(self):
     card=["A",2,3,4,5,6,7,8,9,"J","Q","K"]
-    str(input("Enter 'pick' to chose the card"))
+    str(input("Enter 'pick' to chose the card: "))
     
     for i in range(2):
       card1=random.choice(card)
       card2=random.choice(card)
-      cardO1=random.choice(card)
-      cardO2=random.choice(card)
     
     print(f"your cards: {card1},{card2}")
   
@@ -139,28 +158,50 @@ class game:
 
     print()
     
-    a=str(input("Do you want to pick more card? yes or no"))
+    a=str(input("Do you want to pick more card? yes or no: "))
 
     while a=="yes":
       card3=random.choice(card)
       cardp.append(card3)
-      a=str(input("Do you want to pick more card? yes or no"))
+      print(f"your cards: {cardp}")
+      a=str(input("Do you want to pick more card? yes or no: "))
 
     total=0
-
-    for i in cardp:
+  
+    for i in range(len(cardp)):
       if cardp[i]=="A":
-        k=int("A= 1? or 11? :" )
+        k=int(input("A= 1? or 11? :" ))
         total+=k
       elif cardp[i]=="J" or cardp[i]=="Q" or cardp[i]=="K":
         total+=10
-      else:
-        total+=cardp[i]
+      elif cardp[i]!="A" and cardp[i]!="J" and cardp[i]!="Q" and cardp[i]!="K":
+        total=cardp[i]+total
 
-    if abs(21-self.blackjA()) < abs(21-total):
+    p=self.blackjA()
+    if abs(21-p) < abs(21-total):
+      print(f"your card total : {total}, other player card total : {p}")
       print("You loss")
-    else:
+      self.lossblack+=1
+    elif abs(21-p) > abs(21-total):
       print("You win")
+      print(f"your card total : {total}, other player card total : {p}")
+      self.winblack+=1
+    else:
+      print("tie")
+      self.tieblack+=1
+    print("\n black jack game - your score is not resetted until you exit the game! \n")
+    l=str(input("Do you want to play game again? yes or no or change game: "))
+    if l=="yes":
+      self.blackj()
+    elif l=="no":
+      exit()
+    else:
+      o=str(input("playing rock paper scissors with auto?"))
+      if o=="yes":
+        self.gameSauto()
+      elif o=="no":
+        self.gameNauto()
+
 
 
 
@@ -181,18 +222,9 @@ class game:
           cardOt+=cardOp[i]
         if cardOp[i]=="A":"""
       
-      
-
-    
-
-
-
-
-
-
 
   def __init__(self):
-    k=int(input("Game Options\n1.rock paper scissors\n2.blackjack"))
+    k=int(input("Game Options\n1.rock paper scissors\n2.blackjack\n: "))
     if k==1:
       print("ROCK PAPER SCISSORS")
       b=int(input("How many times do you want to play the game?: "))

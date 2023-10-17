@@ -149,10 +149,7 @@ class game:
           else:
             return total
         return total
-
-
-
-    
+   
   def blackj(self):
     card=["A",2,3,4,5,6,7,8,9,"J","Q","K"]
     str(input("Enter 'pick' to chose the card: "))
@@ -238,7 +235,6 @@ class game:
           cardOt+=cardOp[i]
         if cardOp[i]=="A":"""
       
-
   def __init__(self):
     k=int(input("Game Options\n1.rock paper scissors\n2.blackjack\n: "))
     if k==1:

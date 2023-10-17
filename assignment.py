@@ -9,7 +9,7 @@ class game:
 
   winblack=0
   lossblack=0
-  tiebalck=0
+  tieblack=0
 
   def gameSauto(self, numberOfGame):
     rockps=["rock","paper","scissors"]
@@ -22,6 +22,7 @@ class game:
     for i in range(nOg):
       a=str(input("rock or paper or scissors? : "))
       self.gameN1(a)
+      print()
     self.finish()
 
   def gameN1(self,rps):
@@ -31,25 +32,34 @@ class game:
     if rps=="rock":
       if a==1:
         self.tie+=1
+        print("\ntie")
       elif a==2:
         self.loss+=1
+        print("\nloss")
       else:
         self.win+=1
+        print("\nwin")
     elif rps=="paper":
       if a==1:
         self.win+=1
+        print("\nwin")
       elif a==2:
         self.tie+=1
+        print("\ntie")
       else:
         self.loss+=1
+        print("\nloss")
     else:
       if a==3:
         self.tie+=1
+        print("\ntie")
       elif a==1:
         self.loss+=1
+        print("\nloss")
       else:
         self.win+=1
-    print(f"win : {self.win} loss : {self.loss} tie : {self.tie}, # of Game : {self.gameN}")    
+        print("\nwin")
+    print(f"#{self.gameN} - win : {self.win} | loss : {self.loss} | tie : {self.tie}\n")    
     #return self.win, self.loss, self.tie, self.gameN
 
   def resetS(self):
@@ -62,9 +72,10 @@ class game:
       print("game reseted")
       print()
       l=str(input("Playing game again? yes or no or change: "))
+      print()
       if l=="yes":
-        b=int(input("How many times do you want to play the game?: "))
         c=str(input("Do you want to play game with auto? yes or no: "))
+        b=int(input("How many times do you want to play the game?: "))
         print()
         if c=="yes":
           self.gameSauto(b)
@@ -76,9 +87,10 @@ class game:
         exit()
     else:
       a=str(input("continue game yes or no or change: "))
+      print()
       if a=="yes":
-        b=int(input("How many times do you want to play the game?: "))
         c=str(input("Do you want to play game with auto? yes or no: "))
+        b=int(input("How many times do you want to play the game?: "))
         print()
         if c=="yes":
           self.gameSauto(b)
@@ -91,7 +103,6 @@ class game:
         exit()
       
   def finish(self):
-    print()
     print(f"win:{self.win}\nloss:{self.loss}\ntie:{self.tie}\n#ofGame:{self.gameN}")
     print()
     self.resetS()
@@ -112,18 +123,18 @@ class game:
 
     if 18<total<25:  #19 20 21 22 23 24
       return total
-    else:  # 18 17 16....
-      if total<19:
+    else:  # 18 17 16.... 25 26 27 28....
+      if total<19:  #18 17 16.....
         while 19>total:
           o=self.pickC()
           cardk.append(o)
           total=total+o
           if total==21:
             return 21
-          elif 21<total<25:
+          elif 18<total<25:
             return total
-          elif total>24:
-            if cardk.contains(11):
+          elif total>24: # 25 26 27...
+            if 11 in cardk: #cardk.contains(11):
               total=total-10
               c=self.pickC()
               cardk.append(c)
@@ -131,7 +142,7 @@ class game:
               return total
       else:
         while total>24:
-          if cardk.contains(11):
+          if 11 in cardk:
               total=total-10
               c=self.pickC()
               cardk.append(c)
@@ -179,28 +190,33 @@ class game:
 
     p=self.blackjA()
     if abs(21-p) < abs(21-total):
-      print(f"your card total : {total}, other player card total : {p}")
-      print("You loss")
+      print(f"\nyour card total : {total}, other player card total : {p}")
+      print("\nYou loss")
       self.lossblack+=1
     elif abs(21-p) > abs(21-total):
-      print("You win")
-      print(f"your card total : {total}, other player card total : {p}")
+      print(f"\nyour card total : {total}, other player card total : {p}")
+      print("\nYou win")
       self.winblack+=1
     else:
-      print("tie")
+      print(f"\nyour card total : {total}, other player card total : {p}")
+      print("\ntie")
       self.tieblack+=1
-    print("\n black jack game - your score is not resetted until you exit the game! \n")
+    print("\nblack jack game - your score is not resetted until you exit the game! \n")
+    print(f"win:{self.winblack}\nloss:{self.lossblack}\ntie:{self.tieblack}\n")
     l=str(input("Do you want to play game again? yes or no or change game: "))
+    print()
     if l=="yes":
       self.blackj()
     elif l=="no":
       exit()
     else:
-      o=str(input("playing rock paper scissors with auto?"))
+      o=str(input("playing rock paper scissors with auto? yes or no?: "))
       if o=="yes":
-        self.gameSauto()
+        u=int(input("How many times do you want to play rock paper scissors game?: "))
+        self.gameSauto(u)
       elif o=="no":
-        self.gameNauto()
+        u=int(input("How many times do you want to play rock paper scissors game?: "))
+        self.gameNauto(u)
 
 
 
@@ -226,15 +242,20 @@ class game:
   def __init__(self):
     k=int(input("Game Options\n1.rock paper scissors\n2.blackjack\n: "))
     if k==1:
+      print("\n-------------------")
       print("ROCK PAPER SCISSORS")
-      b=int(input("How many times do you want to play the game?: "))
+      print("-------------------\n")
       a=str(input("Do you want to start the game with auto? yes or no: "))
+      b=int(input("How many times do you want to play rock paper scissors game?: "))
       print()
       if a=="yes":
         self.gameSauto(b)
       else:
         self.gameNauto(b)
     else:
+      print("\n----------")
+      print("BLACK JACK")
+      print("----------\n")
       self.blackj()
 
 
